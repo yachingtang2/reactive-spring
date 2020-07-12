@@ -16,6 +16,7 @@ import static com.reactivespring.constants.ItemConstants.ITEM_END_POINT_V1;
 @RestController
 @Slf4j
 public class ItemController {
+
     @Autowired
     private ItemReactiveRepository itemReactiveRepository;
 
@@ -52,5 +53,12 @@ public class ItemController {
                 })
                 .map(updatedItem -> new ResponseEntity<>(updatedItem, HttpStatus.OK))
                 .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping(ITEM_END_POINT_V1 + "/runtimeException")
+    public Flux<Item> runtimeException() {
+
+        return itemReactiveRepository.findAll()
+            .concatWith(Mono.error(new RuntimeException("RuntimeException occurred.")));
     }
 }

@@ -2,6 +2,8 @@ package com.reactivespring.handler;
 
 
 import com.reactivespring.document.Item;
+import com.reactivespring.document.ItemCapped;
+import com.reactivespring.repository.ItemReactiveCappedRepository;
 import com.reactivespring.repository.ItemReactiveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,6 +18,9 @@ import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 public class ItemHandler {
     @Autowired
     private ItemReactiveRepository itemReactiveRepository;
+
+    @Autowired
+    private ItemReactiveCappedRepository itemReactiveCappedRepository;
 
     private static Mono<ServerResponse> notFound = ServerResponse.notFound().build();
 
@@ -71,4 +76,20 @@ public class ItemHandler {
                 .body(fromValue(item)))
                 .switchIfEmpty(notFound);
     }
+
+//    public Mono<ServerResponse> itemException(ServerRequest serverRequest) {
+//        throw new RuntimeException("RuntimeException occurred.");
+//    }
+
+    public Mono<ServerResponse> itemException(ServerRequest serverRequest){
+
+        throw new RuntimeException("RuntimeException occurred.");
+    }
+
+  public Mono<ServerResponse> itemStream(ServerRequest serverRequest) {
+
+    return ServerResponse.ok()
+            .contentType(MediaType.APPLICATION_STREAM_JSON)
+            .body(itemReactiveCappedRepository.findItemsBy(), ItemCapped.class);
+  }
 }

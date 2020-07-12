@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.3.0.RELEASE'
+	id 'org.springframework.boot' version '2.3.1.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 }
@@ -20,7 +20,9 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+//	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive:2.3.1'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.mongodb:mongodb-driver-sync:4.0.5'
 	compileOnly 'org.projectlombok:lombok:1.18.12'
 	annotationProcessor 'org.projectlombok:lombok:1.18.12'
 
