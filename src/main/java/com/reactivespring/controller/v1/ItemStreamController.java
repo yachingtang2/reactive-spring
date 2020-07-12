@@ -10,7 +10,7 @@ import reactor.core.publisher.Flux;
 
 import static com.reactivespring.constants.ItemConstants.ITEM_STREAM_END_POINT_V1;
 
-//@RestController
+@RestController
 public class ItemStreamController {
 
   @Autowired

@@ -33,7 +33,7 @@ public class ItemRouter {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> itemStreamRouter(ItemHandler itemHandler) {
+    public RouterFunction<ServerResponse> itemStreamRoute(ItemHandler itemHandler) {
         return RouterFunctions
             .route(GET(ITEM_STREAM_FUNCTIONAL_END_POINT_V1).and(accept(APPLICATION_JSON)),
                 itemHandler::itemStream);

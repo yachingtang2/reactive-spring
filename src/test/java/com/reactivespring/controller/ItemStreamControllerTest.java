@@ -40,19 +40,19 @@ public class ItemStreamControllerTest {
 
   @BeforeEach
   public void setUp() {
-//    mongoOperations.dropCollection(ItemCapped.class);
-//    mongoOperations.createCollection(ItemCapped.class, CollectionOptions.empty().maxDocuments(20).size(50000).capped());
-//
-//    Flux<ItemCapped> itemCappedFlux = Flux.interval(Duration.ofSeconds(1))
-//        .map(i -> new ItemCapped(null,"Random Item " + i, (100.00+i)))
-//        .take(5);
-//
-//    itemReactiveCappedRepository
-//        .insert(itemCappedFlux)
-//        .doOnNext((itemCapped -> {
-//          System.out.println("Inserted Item is " + itemCapped);
-//        }))
-//        .blockLast();
+    mongoOperations.dropCollection(ItemCapped.class);
+    mongoOperations.createCollection(ItemCapped.class, CollectionOptions.empty().maxDocuments(20).size(50000).capped());
+
+    Flux<ItemCapped> itemCappedFlux = Flux.interval(Duration.ofSeconds(1))
+        .map(i -> new ItemCapped(null,"Random Item " + i, (100.00+i)))
+        .take(5);
+
+    itemReactiveCappedRepository
+        .insert(itemCappedFlux)
+        .doOnNext((itemCapped -> {
+          System.out.println("Inserted Item is " + itemCapped);
+        }))
+        .blockLast();
   }
 
   @Test
